@@ -5,11 +5,12 @@ resource "aws_lb" "alb" {
   security_groups            = var.alb_security_groups_ids
   subnets                    = var.subnets_id
   enable_deletion_protection = var.enable_deletion_protection
-  tags                       = var.lb_tags
+  tags                       = var.alb_tags
+  idle_timeout               = var.idle_timeout
+  drop_invalid_header_fields = var.drop_invalid_header_fields
   access_logs {
-  bucket          = var.alb_log_bucket
-  prefix          = format("%s-alb", var.alb_name)
-  enabled         = var.alb_enable_logging
+    enabled         = var.alb_enable_logging
+    bucket          = var.alb_enable_logging == false ? "" : var.alb_log_bucket
+    prefix          = var.alb_enable_logging == false ? "" : var.prefix
   }
 }
-
