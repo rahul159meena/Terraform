@@ -29,12 +29,7 @@ resource "aws_security_group" "security_group" {
       security_groups = egress.value.security_groups
     }
   }
-
-  tags = merge(
-    {
-      Name = var.sg_name_tag
-    },
-    var.tags
-  )
+  tags = {
+    Name = var.sg_name_tag
+  }
 }
-
