@@ -1,5 +1,4 @@
-output "tg_arn" {
-  value       = aws_lb_target_group.tg.arn
+output "target_group_arn" {
+  value       = aws_lb_target_group.target_group.arn
   description = "This is TargetGroup arn"
 }
-
