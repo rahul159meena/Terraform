@@ -620,4 +620,5 @@ variable "lt_description" {
       value               = "ABC"
       propagate_at_launch = true
     }
+  }
   ````
