@@ -2,7 +2,7 @@
 variable "sg_name" {
   description = "Name of your Security Group"
   type        = string
-  default     = "test-sg"
+  default     = "da-test-sg"
 }
 
 variable "vpc_id" {

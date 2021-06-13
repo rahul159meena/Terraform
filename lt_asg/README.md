@@ -9,7 +9,7 @@
 ```hcl
 module "lt_and_asg" {
   # details for launch template
-  source                 = "git::ssh://gitlab.com/ot-client/docasap/tf-modules/asg_lt"
+  source                 = ""
   lt_name                = var.launch_template_name
   ami_id                 = var.ami_id
   instance_type          = var.instance_type
@@ -40,10 +40,10 @@ variable "additional_tags" {
   type        = map(string)
   description = "These are the additional tags associated with the main tag of launch template"
   default = {
-    Owner       = "Siddharth Gupta"
-    Location    = "Noida"
-    Create_By   = "Siddharth Gupta"
-    Reviewed_By = "Rajat Vats"
+    Owner       = "XYZ"
+    Location    = "City"
+    Create_By   = "XYZ"
+    Reviewed_By = "ABC"
   }
 }
 variable "additional_tags_asg" {
@@ -51,21 +51,21 @@ variable "additional_tags_asg" {
   description = "These are the additional tags associated with the main tag of auto scaling group"
   default = [{
     key                 = "Owner"
-    value               = "Siddharth Gupta"
+    value               = "XYZ"
     propagate_at_launch = true
     }, {
     key                 = "Location"
-    value               = "Noida"
+    value               = "City"
     propagate_at_launch = true
     },
     {
       key                 = "Create_By"
-      value               = "Siddharth Gupta"
+      value               = "XYZ"
       propagate_at_launch = true
     },
     {
       key                 = "Reviewed_By"
-      value               = "Rajat Vats"
+      value               = "ABC"
       propagate_at_launch = true
     }
   ]
@@ -75,7 +75,7 @@ variable "additional_tags_asg" {
 
 variable "launch_template_name" {
   type        = string
-  default     = "docasap_launch_template"
+  default     = "da-lt"
   description = "The default launch template name"
 }
 
@@ -119,7 +119,7 @@ variable "launch_template" {
 
 variable "asg_name" {
   type        = string
-  default     = "docasap_asg"
+  default     = "da_asg"
   description = "The default auto-scaling group name"
 }
 
@@ -215,21 +215,21 @@ output "asg_name" {
   ````
   {
     key                 = "Owner"
-    value               = "Siddharth Gupta"
+    value               = "XYZ"
     propagate_at_launch = true
     }, {
     key                 = "Location"
-    value               = "Noida"
+    value               = "City"
     propagate_at_launch = true
     },
     {
       key                 = "Create_By"
-      value               = "Siddharth Gupta"
+      value               = "XYZ"
       propagate_at_launch = true
     },
     {
       key                 = "Reviewed_By"
-      value               = "Rajat Vats"
+      value               = "ABC"
       propagate_at_launch = true
     }
   ````

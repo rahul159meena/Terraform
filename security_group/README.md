@@ -8,7 +8,7 @@
 ***main.tf***
 ```hcl
 module "security_group" {
-  source      = "https://gitlab.com/ot-client/docasap/tf-modules/security_group.git"
+  source      = ""
   sg_name     = var.sg_name
   vpc_id      = var.vpc_id
   sg_name_tag = var.sg_name_tag

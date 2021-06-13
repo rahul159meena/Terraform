@@ -17,4 +17,3 @@ output "alb_zoneid" {
   description = "The canonical hosted zone ID of the load balancer (to be used in a Route 53 Alias record)"
   value       = aws_lb.alb.zone_id
 }
-

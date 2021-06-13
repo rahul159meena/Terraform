@@ -1,5 +1,5 @@
 module "target_group_and_target_group_attachment" {
-  source                = "https://gitlab.com/ot-client/docasap/tf-modules/target_group.git"
+  source                = ""
   target_group_details  = var.target_group_details
   vpc_id                = var.vpc_id
   healthy_threshold     = var.healthy_threshold

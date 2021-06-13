@@ -1,5 +1,5 @@
 module "alb_and_alb_listeners" {
-  source                                = "https://gitlab.com/ot-client/docasap/tf-modules/alb.git"
+  source                                = ""
   alb_name                              = var.alb_name
   internal_alb                          = var.internal
   alb_security_groups_ids               = var.alb_security_groups_ids

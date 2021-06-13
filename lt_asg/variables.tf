@@ -1,4 +1,4 @@
-# Variables for Launch Template
+# Variable: Launch Template
 locals {
   tags = {
     Managed_By = "Terraform"
