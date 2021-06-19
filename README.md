@@ -1,4 +1,4 @@
-# Application Load Balancer with Listeners and TargetGroup
+# AWS modules using Terraform
 
 ## This module will create a Load Balancer along side a variety of related resources, including: 
  - VPC
