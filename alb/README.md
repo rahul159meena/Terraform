@@ -126,22 +126,22 @@ variable "target_group_arn" {
 
 | Name  |  Description  | Type | Default | Required |
 | :-------------:  | :-------------: | :-------------: |  :-----------:  | :-------------: | 
-| alb_name  |  Name of Load Balancer  | string  | auto-generate name starts with tf-alb  | yes  | 
-| internal_alb  | If internal true then LB will be internal  |  bool  | false  | yes  |
-| alb_security_groups_ids  |  Security groups to be associated with ALB  | list(string)  | not null  | yes  |
-| subnets_id  |  A list of subnet IDs to attach to the LB  |  list(string)  | not null  | yes  | 
-| enable_deletion_protection  |  Do you want to enable delete protection  | bool  |  false  | yes  |
-| alb_tags  |  A map of tags to add to all resources  |  map(string)  | null  | yes  |
-| alb_log_bucket  |  Name of S3 bucket where log will store  | string | not null  | yes  |
-| prefix  | The S3 bucket prefix Logs are stored in the root if not configured  | string | null | yes |
-| alb_enable_logging  |  Do you want logging enable: true for yes  |  bool  | false  | yes  |
-| target_group_arn  | This is Target Group arn  |  string  | not null  | yes  |
-| certificate_arn  |  Provide SSL certificate arn  | string  |  null  | yes  |
-| listener_details  |  List of some Listener details here  |  map(any)  |  null  | yes  | 
-| forward_port  |  Port number to forward request  | number  |  null  | yes  |
-| ssl_policy  |  SSL policy for HTTPS request  |  string  | null  | yes  |
-| drop_invalid_header_fields | Indicates whether invalid header fields are dropped in application load balancers. Defaults to false | bool |  false | yes | 
-| idle_timeout | The time in seconds that the connection is allowed to be idle | number | 60 | yes |
+| alb_name  |  Name of Load Balancer  | `string`  | auto-generate name starts with tf-alb  | yes  | 
+| internal_alb  | If internal true then LB will be internal  |  `bool`  | false  | yes  |
+| alb_security_groups_ids  |  Security groups to be associated with ALB  | `list(string)`  | not null  | yes  |
+| subnets_id  |  A list of subnet IDs to attach to the LB  |  `list(string)`  | not null  | yes  | 
+| enable_deletion_protection  |  Do you want to enable delete protection  | `bool`  |  false  | yes  |
+| alb_tags  |  A map of tags to add to all resources  |  `map(string)`  | null  | yes  |
+| alb_log_bucket  |  Name of S3 bucket where log will store  | `string` | not null  | yes  |
+| prefix  | The S3 bucket prefix Logs are stored in the root if not configured  | `string` | null | yes |
+| alb_enable_logging  |  Do you want logging enable: true for yes  |  `bool`  | false  | yes  |
+| target_group_arn  | This is Target Group arn  |  `string`  | not null  | yes  |
+| certificate_arn  |  Provide SSL certificate arn  | `string  |  null  | yes  |
+| listener_details  |  List of some Listener details here  |  `map(any)`  |  null  | yes  | 
+| forward_port  |  Port number to forward request  | `number`  |  null  | yes  |
+| ssl_policy  |  SSL policy for HTTPS request  |  `string`  | null  | yes  |
+| drop_invalid_header_fields | Indicates whether invalid header fields are dropped in application load balancers. Defaults to false | `bool` |  false | yes | 
+| idle_timeout | The time in seconds that the connection is allowed to be idle | `number` | 60 | yes |
 
 ### Output
 
