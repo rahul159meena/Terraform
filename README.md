@@ -707,3 +707,15 @@ variable "lt_description" {
     }
   }
   ````
+
+## Development
+### Development Requirements
+ - Terraform
+ - AWS Configure
+### Configure environment variables
+
+```shell
+export AWS_ACCESS_KEY_ID=AKIA....................
+export AWS_SECRET_ACCESS_KEY=wJal..............................
+export AWS_DEFAULT_REGION=us-east-1
+```
