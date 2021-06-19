@@ -1,6 +1,6 @@
 # AWS modules using Terraform
 
-## This module will create a Load Balancer along side a variety of related resources, including: 
+## This Terraform repository contains several module which will creates the variety of resources: 
  - VPC
  - Security Group
  - Application Load Balancer 
