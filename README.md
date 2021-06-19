@@ -464,10 +464,10 @@ variable "additional_tags" {
   type        = map(string)
   description = "These are the additional tags associated with the main tag of launch template"
   default = {
-    Owner       = "Siddharth Gupta"
-    Location    = "Noida"
-    Create_By   = "Siddharth Gupta"
-    Reviewed_By = "Rajat Vats"
+    Owner       = "XYZ"
+    Location    = "CITY-NAME"
+    Create_By   = "XYZ"
+    Reviewed_By = "ABC"
   }
 }
 variable "additional_tags_asg" {
@@ -475,21 +475,21 @@ variable "additional_tags_asg" {
   description = "These are the additional tags associated with the main tag of auto scaling group"
   default = [{
     key                 = "Owner"
-    value               = "Siddharth Gupta"
+    value               = "XYZ"
     propagate_at_launch = true
     }, {
     key                 = "Location"
-    value               = "Noida"
+    value               = "CITY-NAME"
     propagate_at_launch = true
     },
     {
       key                 = "Create_By"
-      value               = "Siddharth Gupta"
+      value               = "XYZ"
       propagate_at_launch = true
     },
     {
       key                 = "Reviewed_By"
-      value               = "Rajat Vats"
+      value               = "ABC"
       propagate_at_launch = true
     }
   ]
