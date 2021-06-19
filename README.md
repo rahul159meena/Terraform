@@ -1,6 +1,7 @@
 # Application Load Balancer with Listeners and TargetGroup
 
 ## This module will create a Load Balancer along side a variety of related resources, including: 
+ - VPC
  - Security Group
  - Application Load Balancer 
     - Access log enabled in S3 bucket
@@ -30,6 +31,14 @@ provider "aws" {
 
 ***main.tf***
 ```hcl
+module "vpc" {
+    source               = "github"
+    cidr_block           = var.cidr_block
+    instance_tenancy     = var.instance_tenancy
+    enable_dns_support   = var.enable_dns_support
+    enable_dns_hostnames = var.enable_dns_hostnames
+}
+
 module "security_group" {
   source = ""
   sg_name = var.sg_name
@@ -177,6 +186,68 @@ module "lt_and_asg" {
 
 ***variables.tf***
 ```hcl
+# Variable for VPC
+variable "cidr_block" 
+{
+    description = "The CIDR Block for VPC"
+    type        = string
+    default     = "10.0.0.0/16"
+}
+
+variable "instance_tenancy"
+{
+    description = "A tenancy option for instances launched into the VPC"
+    type        =  string
+    default     = "default"
+}
+
+variable "enable_dns_support"
+{
+    description = "A boolean flag to enable/disable DNS support in the VPC"
+    type        = bool
+    default     = true
+}
+
+variable "enable_dns_hostnames"
+{
+    description = "A boolean flag to enable/disable DNS hostnames in the VPC"
+    type        = bool
+    default     = true
+}
+
+variable "name"
+{
+    description = "The name for the VPC"
+    type        = string
+    default     = "da-vpc"
+}
+
+variable "tags"
+{
+    description = "A mapping of tags to assign to all resources"
+    type        = map(string)
+    default     = {}
+}
+
+#Variables for Security Group
+variable "sg_name" {
+  description = "Name of your Security Group"
+  type        = string
+  default     = "da-test-sg"
+}
+
+variable "vpc_id" {
+  description = "Give your vpc id here"
+  type        = string
+  default     = "vpc-0391267e62cf0cff1"
+}
+
+variable "sg_name_tag" {
+  description = "Tag name for your Security Group"
+  type        = string
+  default     = "tf-sg"
+}
+
 # Variables for ALB
 variable "alb_name" {
   description = "Name for Load Balancer"
@@ -517,55 +588,59 @@ variable "lt_description" {
 
 
 ### Variables
-
-| Name  |  Description  | Type | Default | Required |
-| :-------------:  | :-------------: | :-------------: |  :-----------:  | :-------------: | 
-| alb_name  |  Name of Load Balancer  | string  | auto-generate name starts with tf-alb  | yes  | 
-| internal_alb  | If internal true then LB will be internal  |  bool  | false  | yes  |
-| alb_security_groups_ids  |  Security groups to be associated with ALB  | list(string)  | not null  | yes  |
-| subnets_id  |  A list of subnet IDs to attach to the LB  |  list(string)  | not null  | yes  | 
-| enable_deletion_protection  |  Do you want to enable delete protection  | bool  |  false  | yes  |
-| alb_tags  |  A map of tags to add to all resources  |  map(string)  | null  | yes  |
-| alb_log_bucket  |  Name of S3 bucket where log will store  | string | not null  | yes  |
-| prefix  | The S3 bucket prefix Logs are stored in the root if not configured  | string | null | yes |
-| alb_enable_logging  |  Do you want logging enable: true for yes  |  bool  | false  | yes  |
-| target_group_arn  | This is Target Group arn  |  string  | not null  | yes  |
-| certificate_arn  |  Provide SSL certificate arn  | string  |  null  | yes  |
-| listener_details  |  List of some Listener details here  |  map(any)  |  null  | yes  | 
-| forward_port  |  Port number to forward request  | number  |  null  | yes  |
-| ssl_policy  |  SSL policy for HTTPS request  |  string  | null  | yes  |
-| drop_invalid_header_fields | Indicates whether invalid header fields are dropped in application load balancers. Defaults to false | bool |  false | yes | 
-| idle_timeout | The time in seconds that the connection is allowed to be idle | number | 60 | yes |
-| target_group_details  |  Some essential details of TargetGroup  | map(any)  | not null  | yes  | 
-| vpc_id  | VPC ID for your TargetGroup  |  string  | null  | yes  |
-| healthy_threshold  | Number of consecutive health checks successes required before considering an unhealthy target healthy | number  |  3  | yes  |
-| unhealthy_threshold  |  Number of consecutive health check failures required before considering the target unhealthy  |  number  |  3  | yes  | 
-| timeout  |  Amount of time, in seconds, during which no response means a failed health check  | number  |  5  | yes  |
-| interval  |  Approximate amount of time, in seconds, between health checks of an individual target  |  string  | 5  | yes  |
-| health_check_path |  Path to health-check  |  string  | / | yes |
-| health_check_port | Port to health-check | number | 80 | yes |
-| target_ids  | Give target_ids which you want to register with your TG  |  string  | null  | yes  |
-| port  |  Port on which instance will get registered in Target group  | number  |  null  | yes  |
-| deregistration_delay  |  Amount time for Load Balancing to wait before changing the state of a deregistering target from draining to unused  | number | 300 | yes  |
-| slow_start  | Amount time for targets to warm up before the load balancer sends them a full share of requests  | number | 0 | yes |
-| target_ids | This is the TargetID where Target Group will attach | list(string) | not null | yes |
-| port | Port on which instance will get registered in Target group | number | 80 | yes |
-| lt_name  | The name of the launch template  | string  | null  | yes  | 
-| lt_description  | Description of the launch template  | string  | null  | yes  |
-| user_data  | The Base64-encoded user data to provide when launching the instance  | string  | null  | yes  |
-| image_id  | The AMI from which to launch the instance  | string  | not null  | yes  | 
-| instance_type  | The type of the instance  | string  | not null  | yes  | yes 
-| key_name  | The key name to use for the instance  | string  | null  | yes  | yes
-| vpc_security_group_ids  | A list of security group IDs to associate with  | list(string)  | not null  | yes  |
-| iam_instance_profile  | The IAM Instance Profile to launch the instance with  | list(map(string))  | null  | yes  |
-| target_group_arn  | A aws_alb_target_group ARNs, for use with Application Load Balancing  | string  | null  | yes  |
-| lt_tags  | The tag associated with the launch template  | map(string)  | null  | yes  | 
-| asg_name  | The name of auto scaling group  | string  | null  | yes  |  
-| asg_tags  | The tag associated with auto scaling group | ist(map(string))  | null  | yes  | 
-| max_size  | The maximum size of the Auto Scaling Group  | string  | not null  | yes  | 
-| min_size  | The minimum size of the Auto Scaling Group  | string  | not null  | yes  | 
-| desired_capacity  | The number of Amazon EC2 instances that should be running in the group  | string  | not null  | yes  |
-| subnet_ids  | The list of subnet ids associated with the auto scaling group  | list(string)  | not null  | yes  |
+| Name                        |  Description                                                                                                         | Type     | Default | Required |
+| :-------------------------: | :------------------------------------------------------------------------------------------------------------------: | :------: |  :----:  | :------: | 
+| cidr_block                  | The CIDR block for the VPC                                                                                           | `string` | 10.0.0.0/16                            | Yes |
+| instance_tenancy            | A tenancy option for instances launched into the VPC options are (default, dedicated or host)                        | `string` | default                                | optional |
+| enable_dns_support          | A boolean flag to enable/disable DNS support in the VPC                                                              | `bool` | true                                   | optional |
+| enable_dns_hostnames        | A boolean flag to enable/disable DNS hostnames in the VPC                                                            | `bool` | false                                  | optional |
+| name                        | The name for the VPC                                                                                                 | `string` | null                                   | optional |
+| alb_name                    |  Name of Load Balancer                                                                                               | `string`  | auto-generate name starts with tf-alb  | yes  | 
+| internal_alb                | If internal true then LB will be internal                                                                            | `bool`  | false                                  | yes  |
+| alb_security_groups_ids     |  Security groups to be associated with ALB                                                                           | `list(string)`  | not null                          | yes  |
+| subnets_id                  |  A list of subnet IDs to attach to the LB                                                                            | `list(string)` | not null                           | yes  | 
+| enable_deletion_protection  |  Do you want to enable delete protection                                                                             | `bool`  |  false                                  | yes  |
+| alb_tags                    |  A map of tags to add to all resources                                                                               | `map(string)`  | null                              | yes  |
+| alb_log_bucket              |  Name of S3 bucket where log will store                                                                              | `string` | not null                               | yes  |
+| prefix                      | The S3 bucket prefix Logs are stored in the root if not configured                                                   | `string` | null                                   | yes |
+| alb_enable_logging          |  Do you want logging enable: true for yes                                                                            |  `bool`  | false                                  | yes  |
+| target_group_arn            | This is Target Group arn                                                                                             |  `string`  | not null                               | yes  |
+| certificate_arn             |  Provide SSL certificate arn                                                                                         | `string`  |  null                                   | yes  |
+| listener_details            |  List of some Listener details here                                                                                  |  `map(any)`  |  null                                | yes  | 
+| forward_port                |  Port number to forward request                                                                                      | `number`  |  null                                   | yes  |
+| ssl_policy                  |  SSL policy for HTTPS request                                                                                        |  `string`  | null                                   | yes  |
+| drop_invalid_header_fields  | Indicates whether invalid header fields are dropped in application load balancers. Defaults to false                 | `bool` |  false                                  | yes | 
+| idle_timeout                | The time in seconds that the connection is allowed to be idle                                                        | `number` | 60                                     | yes |
+| target_group_details        |  Some essential details of TargetGroup                                                                               | `map(any)`  | not null                             | yes  | 
+| vpc_id                      | VPC ID for your TargetGroup                                                                                          |  `string`  | null                                   | yes  |
+| healthy_threshold           | Number of consecutive health checks successes required before considering an unhealthy target healthy                | `number`  |  3                                      | yes  |
+| unhealthy_threshold         |  Number of consecutive health check failures required before considering the target unhealthy                        |  `number`  |  3                                   | yes  | 
+| timeout                     |  Amount of time, in seconds, during which no response means a failed health check                                    | `number`  |  5                                      | yes  |
+| interval                    |  Approximate amount of time, in seconds, between health checks of an individual target                               |  `string`  | 5                                      | yes  |
+| health_check_path           |  Path to health-check                                                                                                |  `string`  | /                                      | yes |
+| health_check_port           | Port to health-check                                                                                                 | `number` | 80                                     | yes |
+| target_ids                  | Give target_ids which you want to register with your TG                                                              |  `string`  | null                                   | yes  |
+| port                        |  Port on which instance will get registered in Target group                                                          | `number`  |  null                                   | yes  |
+| deregistration_delay        |  Amount time for Load Balancing to wait before changing the state of a deregistering target from draining to unused  | `number` | 300                                    | yes  |
+| slow_start                  | Amount time for targets to warm up before the load balancer sends them a full share of requests                      | `number` | 0                                      | yes |
+| target_ids                  | This is the TargetID where Target Group will attach                                                                  | `list(string)` | not null                           | yes |
+| port                        | Port on which instance will get registered in Target group                                                           | `number` | 80                                     | yes |
+| lt_name                     | The name of the launch template                                                                                      | `string`  | null                                   | yes  | 
+| lt_description              | Description of the launch template                                                                                   | `string`  | null                                   | yes  |
+| user_data                   | The Base64-encoded user data to provide when launching the instance                                                  | `string`  | null                                   | yes  |
+| image_id                    | The AMI from which to launch the instance                                                                            | `string`  | not null                               | yes  | 
+| instance_type               | The type of the instance                                                                                             | `string`  | not null                               | yes  |
+| key_name                    | The key name to use for the instance                                                                                 | `string`  | null                                   | yes  |
+| vpc_security_group_ids      | A list of security group IDs to associate with                                                                       | `list(string)`  | not null                          | yes  |
+| iam_instance_profile        | The IAM Instance Profile to launch the instance with                                                                 | `list(map(string))`  | null                     | yes  |
+| target_group_arn            | A aws_alb_target_group ARNs, for use with Application Load Balancing                                                 | `string`  | null                                   | yes  |
+| lt_tags                     | The tag associated with the launch template                                                                          | `map(string)`  | null                              | yes  | 
+| asg_name                    | The name of auto scaling group                                                                                       | `string`  | null                                   | yes  |  
+| asg_tags                    | The tag associated with auto scaling group                                                                           | `list(map(string))`  | null                     | yes  | 
+| max_size                    | The maximum size of the Auto Scaling Group                                                                           | `string`  | not null                               | yes  | 
+| min_size                    | The minimum size of the Auto Scaling Group                                                                           | `string`  | not null                               | yes  | 
+| desired_capacity            | The number of Amazon EC2 instances that should be running in the group                                               | `string`  | not null                               | yes  |
+| subnet_ids                  | The list of subnet ids associated with the auto scaling group                                                        | `list(string)`| not null                            | yes  |
 
 
 
@@ -574,16 +649,26 @@ variable "lt_description" {
 ### Output
 
 
-| Name | Description |
-| :-----: | :-----------: |
-| alb_arn | This will be ALB arn |
-| alb_id | ID of the ALB |
-| alb_dns | The DNS name of the ALB |
-| alb_zoneid | The canonical hosted zone ID of the load balancer (to be used in a Route 53 Alias record) |
-| alb_forward_listener_arn | This is alb_listener Arn |
-| listener_rule_pattern_arn  | Arn's associated with the listener rules created  |
-| launch_template_id  | Id of launch template  |
-| aws_autoscaling_id  | Id of autoscaling group |
+| Name                          | Description                                                                                  |
+| :---------------------------: | :------------------------------------------------------------------------------------------: |
+| vpc_arn                       | Amazon Resource Name (ARN) of VPC                                                         |
+| vpc_id                        | The ID of the VPC                                                                         |
+| vpc_cidr_block                | The CIDR block of the VPC                                                                 |
+| vpc_instance_tenancy          | Tenancy of instances spin up within VPC                                                   |
+| vpc_enable_dns_support        | Whether or not the VPC has DNS support                                                    |
+| vpc_enable_dns_hostnames      | Whether or not the VPC has DNS hostname support                                           |
+| vpc_main_route_table_id       | The ID of the main route table associated with this VPC                                   |
+| vpc_default_network_acl_id    | The ID of the network ACL created by default on VPC creation                              |
+| vpc_default_security_group_id | The ID of the security group created by default on VPC creation                           |
+| vpc_default_route_table_id    | The ID of the route table created by default on VPC creation                              |
+| alb_arn                       | This will be ALB arn                                                                      |
+| alb_id                        | ID of the ALB                                                                             |
+| alb_dns                       | The DNS name of the ALB                                                                   |
+| alb_zoneid                    | The canonical hosted zone ID of the load balancer (to be used in a Route 53 Alias record) |
+| alb_forward_listener_arn      | This is alb_listener Arn                                                                  |
+| listener_rule_pattern_arn     | Arn's associated with the listener rules created                                          |
+| launch_template_id            | Id of launch template                                                                     |
+| aws_autoscaling_id            | Id of autoscaling group                                                                   |
 
 
 ### Note 

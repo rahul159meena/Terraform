@@ -115,24 +115,24 @@ output "vpc_default_route_table_id" {
 ```
 
 ### Variables
-| Name  |  Description  | Type | Default | Required |
-| :-------------:  | :-------------: | :-------------: |  :-----------:  | :-------------: |
-| cidr_block | The CIDR block for the VPC | `string` | 10.0.0.0/16 | Yes |
-| instance_tenancy | A tenancy option for instances launched into the VPC options are (default, dedicated or host) | `string` | default | optional |
-| enable_dns_support | A boolean flag to enable/disable DNS support in the VPC | `bool` | true | optional |
-| enable_dns_hostnames | A boolean flag to enable/disable DNS hostnames in the VPC | `bool` | false | optional |
-| name | The name for the VPC | `string` | null | optional |
+| Name                        |  Description                                                                                  | Type | Default | Required |
+| :------------------------:  | :-------------------------------------------------------------------------------------------: | :------: |  :--------: | :-------------: |
+| cidr_block                  | The CIDR block for the VPC                                                                    | `string` | 10.0.0.0/16 | Yes |
+| instance_tenancy            | A tenancy option for instances launched into the VPC options are (default, dedicated or host) | `string` | default     | optional |
+| enable_dns_support          | A boolean flag to enable/disable DNS support in the VPC                                       | `bool`   | true        | optional |
+| enable_dns_hostnames        | A boolean flag to enable/disable DNS hostnames in the VPC                                     | `bool`   | false       | optional |
+| name                        | The name for the VPC                                                                          | `string` | null        | optional |
 
 ### Output
-| Name | Description |
-| :--: | :---------: |
-| vpc_arn | Amazon Resource Name (ARN) of VPC |
-| vpc_id | The ID of the VPC |
-| vpc_cidr_block | The CIDR block of the VPC |
-| vpc_instance_tenancy | Tenancy of instances spin up within VPC |
-| vpc_enable_dns_support | Whether or not the VPC has DNS support |
-| vpc_enable_dns_hostnames | Whether or not the VPC has DNS hostname support |
-| vpc_main_route_table_id | The ID of the main route table associated with this VPC | 
-| vpc_default_network_acl_id | The ID of the network ACL created by default on VPC creation |
+| Name                          | Description                                                     |
+| :---------------------------: | :-------------------------------------------------------------: |
+| vpc_arn                       | Amazon Resource Name (ARN) of VPC                               |
+| vpc_id                        | The ID of the VPC                                               |
+| vpc_cidr_block                | The CIDR block of the VPC                                       |
+| vpc_instance_tenancy          | Tenancy of instances spin up within VPC                         |
+| vpc_enable_dns_support        | Whether or not the VPC has DNS support                          |
+| vpc_enable_dns_hostnames      | Whether or not the VPC has DNS hostname support                 |
+| vpc_main_route_table_id       | The ID of the main route table associated with this VPC         |
+| vpc_default_network_acl_id    | The ID of the network ACL created by default on VPC creation    |
 | vpc_default_security_group_id | The ID of the security group created by default on VPC creation |
-| vpc_default_route_table_id | The ID of the route table created by default on VPC creation |
+| vpc_default_route_table_id    | The ID of the route table created by default on VPC creation    |
