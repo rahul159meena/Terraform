@@ -1,0 +1,7 @@
+@Library("shared-library") _
+node 
+{
+    terraformWorkflow.call(
+        configFilePath: "vpc/sample/config.properties"
+    )
+}
