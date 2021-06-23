@@ -13,7 +13,7 @@ module "vpc" {
 
     # Details for Public Subnet
     public_subnet_cidr_blocks = var.public_subnet_cidr_blocks
-    #public_availability_zones = data.aws_availability_zones.available.names
+    public_availability_zones = var.public_availability_zones
     map_public_ip_on_launch   = var.map_public_ip_on_launch
     name                      = var.name
 }

@@ -46,11 +46,11 @@ variable "tags" {
   description = "A mapping of tags to assign to all resources."
 }
 
-# variable "public_availability_zones" {
-#     description = "The Availability Zones for the public subnets"
-#     type        = list(string)
-#     default     = []
-# }
+variable "public_availability_zones" {
+    description = "The Availability Zones for the public subnets"
+    type        = list(string)
+    default     = []
+}
 
 variable "public_subnet_cidr_blocks" {
     description = "The CIDR blocks for the public subnets"
