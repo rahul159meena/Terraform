@@ -21,7 +21,7 @@ module "network" {
 module "security_group" {
     source      = "git://github.com/PratapSingh13/Terraform.git//security_group"
     sg_name     = var.sg_name
-    vpc_id      = module.networking.vpc_id
+    vpc_id      = module.network.vpc_id
     sg_name_tag = var.sg_name_tag 
     sg_ingress  = [
     {
