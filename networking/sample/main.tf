@@ -50,7 +50,7 @@ module "security_group" {
 
 module "rds" {
   source                  = "git://github.com/PratapSingh13/Terraform.git//rds"
-  identifier              = var.identifier_name
+  identifier_name         = var.identifier_name
   allocated_storage       = var.allocated_storage
   storage_type            = var.storage_type
   engine                  = var.engine
