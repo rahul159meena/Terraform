@@ -17,3 +17,33 @@ module "network" {
     map_public_ip_on_launch   = var.map_public_ip_on_launch
     name                      = var.name
 }
+
+module "security_group" {
+    source      = "git://github.com/PratapSingh13/Terraform.git//security_group"
+    sg_name     = var.sg_name
+    vpc_id      = module.networking.vpc_id
+    sg_name_tag = var.sg_name_tag 
+    sg_ingress  = [
+    {
+      description      = "For MySQL port"
+      from_port        = 3306
+      to_port          = 3306
+      protocol         = "tcp"
+      cidr_blocks      = ["0.0.0.0/0"]
+      self             = false
+      security_groups  = []
+    }
+  ]
+
+  sg_egress = [
+    {
+      description      = ""
+      from_port        = 0
+      to_port          = 0
+      protocol         = -1
+      cidr_blocks      = ["0.0.0.0/0"]
+      self             = false
+      security_groups  = []
+    }
+  ]
+}
