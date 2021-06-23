@@ -40,7 +40,7 @@ variable "igw_name" {
 variable "name" {
   type        = string
   description = "The name for the VPC"
-  default     = "cfast-public"
+  default     = "cfast"
 }
 
 variable "tags" {
