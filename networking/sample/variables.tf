@@ -35,3 +35,34 @@ variable "igw_name" {
     type        = string
     default     = "cfast-IGW"
 }
+
+# Variables for Public Subnets
+variable "name" {
+  type        = string
+  description = "The name for the VPC"
+  default     = "cfast-public"
+}
+
+variable "tags" {
+  default     = {}
+  type        = map(string)
+  description = "A mapping of tags to assign to all resources."
+}
+
+variable "public_availability_zones" {
+    description = "The Availability Zones for the public subnets"
+    type        = list(string)
+    default     = ["us-east-1a", "us-east-1b"]
+}
+
+variable "public_subnet_cidr_blocks" {
+    description = "The CIDR blocks for the public subnets"
+    type        = list(string)
+    default     = ["10.255.0.0/24", "10.255.1.0/24"]
+}
+
+variable "map_public_ip_on_launch" {
+    description = "Specify true to indicate that instances launched into the subnet should be assigned a public IP address"
+    type        = string
+    default     = true
+}

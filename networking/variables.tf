@@ -33,3 +33,33 @@ variable "igw_name" {
     description = "The name for the Internet Gateway"
     type        = string
 }
+
+# Variables for Public Subnets
+variable "name" {
+  type        = string
+  description = "The name for the VPC."
+}
+
+variable "tags" {
+  default     = {}
+  type        = map(string)
+  description = "A mapping of tags to assign to all resources."
+}
+
+variable "public_availability_zones" {
+    description = "The Availability Zones for the public subnets"
+    type        = list(string)
+    default     = []
+}
+
+variable "public_subnet_cidr_blocks" {
+    description = "The CIDR blocks for the public subnets"
+    type        = list(string)
+    default     = []
+}
+
+variable "map_public_ip_on_launch" {
+    description = "Specify true to indicate that instances launched into the subnet should be assigned a public IP address"
+    type        = string
+    default     = true
+}
