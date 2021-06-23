@@ -23,7 +23,7 @@ variable "enable_dns_hostnames" {
     default     = true
 }
 
-variable "name" {
+variable "vpc_name" {
     description = "The name for the VPC"
     type        = string
 }
@@ -32,4 +32,15 @@ variable "tags" {
     description = "A mapping of tags to assign to all resources"
     type        = map(string)
     default     = {}
+}
+
+# Variables for Internet Gateway
+variable "vpc_id" {
+    description = "This will the vpc where IGW will be connected"
+    type        = string
+}
+
+variable "igw_name" {
+    description = "The name for the Internet Gateway"
+    type        = string
 }

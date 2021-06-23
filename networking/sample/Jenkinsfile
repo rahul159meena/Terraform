@@ -2,6 +2,6 @@
 node 
 {
     terraformWorkflow.call(
-        configFilePath: "vpc/sample/config.properties"
+        configFilePath: "networking/sample/config.properties"
     )
 }
