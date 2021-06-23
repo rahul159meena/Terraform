@@ -32,11 +32,13 @@ provider "aws" {
 ***main.tf***
 ```hcl
 module "vpc" {
-  source               = "git@github.com:PratapSingh13/Terraform.git//vpc"
+  source               = "git://github.com/PratapSingh13/Terraform.git//networking"
   cidr_block           = var.cidr_block
   instance_tenancy     = var.instance_tenancy
   enable_dns_support   = var.enable_dns_support
   enable_dns_hostnames = var.enable_dns_hostnames
+  vpc_name             = var.vpc_name
+  igw_name             = var.igw_name
 }
 
 module "security_group" {
@@ -189,44 +191,44 @@ module "lt_and_asg" {
 # Variable for VPC
 variable "cidr_block" 
 {
-    description = "The CIDR Block for VPC"
-    type        = string
-    default     = "10.0.0.0/16"
+  description = "The CIDR Block for VPC"
+  type        = string
+  default     = "10.0.0.0/16"
 }
 
 variable "instance_tenancy"
 {
-    description = "A tenancy option for instances launched into the VPC"
-    type        =  string
-    default     = "default"
+  description = "A tenancy option for instances launched into the VPC"
+  type        =  string
+  default     = "default"
 }
 
 variable "enable_dns_support"
 {
-    description = "A boolean flag to enable/disable DNS support in the VPC"
-    type        = bool
-    default     = true
+  description = "A boolean flag to enable/disable DNS support in the VPC"
+  type        = bool
+  default     = true
 }
 
 variable "enable_dns_hostnames"
 {
-    description = "A boolean flag to enable/disable DNS hostnames in the VPC"
-    type        = bool
-    default     = true
+  description = "A boolean flag to enable/disable DNS hostnames in the VPC"
+  type        = bool
+  default     = true
 }
 
-variable "name"
+variable "vpc_name"
 {
-    description = "The name for the VPC"
-    type        = string
-    default     = "da-vpc"
+  description = "The name for the VPC"
+  type        = string
+  default     = "cfast-vpc"
 }
 
-variable "tags"
-{
-    description = "A mapping of tags to assign to all resources"
-    type        = map(string)
-    default     = {}
+# Variables for Internet Gateway
+variable "igw_name" {
+  description = "The name for the Internet Gateway"
+  type        = string
+  default     = "cfast-IGW"
 }
 
 #Variables for Security Group
