@@ -1,9 +1,11 @@
-# AWS VPC
+# AWS Networking
 
 ## This module will create a VPC along the variety of related information
- - CIDR Block
- - DNS Support
- - DNS Hostname
+  - VPC
+    - CIDR Block
+    - DNS Support
+    - DNS Hostname
+  - IGW
 ### Usage
 ***main.tf***
 ```hcl
@@ -14,12 +16,7 @@ module "vpc" {
   enable_dns_support   = var.enable_dns_support
   enable_dns_hostnames = var.enable_dns_hostnames
   vpc_name             = var.vpc_name
-}
-
-module "igw" {
-  source   = "git://github.com/PratapSingh13/Terraform.git//networking"
-  vpc_id   = module.vpc.vpc_id
-  igw_name = var.igw_name
+  igw_name             = var.igw_name
 }
 ```
 
@@ -59,13 +56,6 @@ variable "vpc_name"
   description = "The name for the VPC"
   type        = string
   default     = "cfast-vpc"
-}
-
-variable "tags"
-{
-  description = "A mapping of tags to assign to all resources"
-  type        = map(string)
-  default     = {}
 }
 
 # Variables for Internet Gateway

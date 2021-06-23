@@ -29,8 +29,6 @@ variable "vpc_name" {
 }
 
 # Variables for Internet Gateway
-
-
 variable "igw_name" {
     description = "The name for the Internet Gateway"
     type        = string
