@@ -35,10 +35,7 @@ variable "tags" {
 }
 
 # Variables for Internet Gateway
-variable "vpc_id" {
-    description = "This will the vpc where IGW will be connected"
-    type        = string
-}
+
 
 variable "igw_name" {
     description = "The name for the Internet Gateway"

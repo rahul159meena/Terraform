@@ -9,6 +9,5 @@ module "vpc" {
 
 module "igw" {
     source   = "git://github.com/PratapSingh13/Terraform.git//networking"
-    vpc_id   = module.vpc.vpc_id
     igw_name = var.igw_name
 }
