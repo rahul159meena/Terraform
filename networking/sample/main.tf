@@ -1,4 +1,4 @@
-module "vpc" {
+module "network" {
     source                    = "git://github.com/PratapSingh13/Terraform.git//networking"
     
     # Details for VPC
