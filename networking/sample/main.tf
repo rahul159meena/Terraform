@@ -58,10 +58,8 @@ module "rds" {
   instance_class          = var.instance_class
   username                = var.username
   password                = var.password
-  vpc_security_group_ids  = var.vpc_security_group_ids
+  vpc_security_group_ids  = module.security_group.sg_id
   skip_final_snapshot     = var.skip_final_snapshot
-  parameter_group_name    = aws_db_parameter_group.parameter_group.id
-  db_subnet_group_name    = aws_db_subnet_group.subnet_group.id
   backup_retention_period = var.backup_retention_period
   multi_az                = var.multi_az
   name                    = var.name
