@@ -29,12 +29,6 @@ variable "vpc_name" {
     default     = "cfast-vpc"
 }
 
-variable "tags" {
-    description = "A mapping of tags to assign to all resources"
-    type        = map(string)
-    default     = {}
-}
-
 # Variables for Internet Gateway
 variable "igw_name" {
     description = "The name for the Internet Gateway"

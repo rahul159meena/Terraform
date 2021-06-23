@@ -28,12 +28,6 @@ variable "vpc_name" {
     type        = string
 }
 
-variable "tags" {
-    description = "A mapping of tags to assign to all resources"
-    type        = map(string)
-    default     = {}
-}
-
 # Variables for Internet Gateway
 
 
