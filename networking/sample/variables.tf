@@ -147,3 +147,9 @@ variable "multi_az" {
     type        = bool
     default     = false
 }
+
+variable "subnet_ids" {
+    description = "List of subnet IDs"
+    type        = list(string)
+    default     = ["subnet-0a70a6b49cb89ab0c", "subnet-0997c42de863f2529"]
+}
