@@ -2,7 +2,6 @@
 variable "identifier_name" {
     description = "The name of the RDS instance, if omitted, Terraform will assign a random, unique identifier"
     type        = string
-    default     = "coinsfast_db"
 }
 
 variable "allocated_storage" {
@@ -47,6 +46,11 @@ variable "password" {
     default     = "admin123"
 }
 
+variable "vpc_security_group_ids" {
+    description = "ID for the Security Group"
+    type        = list(string)
+}
+
 variable "skip_final_snapshot" {
     description = "Determines whether a final DB snapshot is created before the DB instance is deleted"
     type        = bool
@@ -63,4 +67,9 @@ variable "multi_az" {
     description = "Specifies if the RDS instance is multi-AZ"
     type        = bool
     default     = false
+}
+
+variable "name" {
+  type        = string
+  description = "The name for the RDS"
 }
