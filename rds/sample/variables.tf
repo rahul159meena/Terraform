@@ -69,7 +69,7 @@ variable "multi_az" {
     default     = false
 }
 
-variable "name" {
+variable "rds_name" {
     type        = string
     description = "The name for the RDS"
 }

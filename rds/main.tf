@@ -16,7 +16,7 @@ resource "aws_db_instance" "coinsfast_db" {
 }
 
 resource "aws_db_parameter_group" "db_parameter_group" {
-    name      = "${var.name}_parameter_group"
+    name      = "${var.rds_name}_parameter_group"
     family    = "${var.engine}${var.engine_version}"
     parameter {
         name  = "character_set_server"
@@ -30,6 +30,6 @@ resource "aws_db_parameter_group" "db_parameter_group" {
 
 resource "aws_db_subnet_group" "db_subnet_group" {
 
-    name       = "${var.name}_subnet_group"
+    name       = "${var.rds_name}_subnet_group"
     subnet_ids = var.subnet_ids
 }

@@ -62,6 +62,6 @@ module "rds" {
   skip_final_snapshot     = var.skip_final_snapshot
   backup_retention_period = var.backup_retention_period
   multi_az                = var.multi_az
-  name                    = var.name
+  rds_name                    = var.name
   subnet_ids              = var.subnet_ids
 }
