@@ -70,6 +70,11 @@ variable "multi_az" {
 }
 
 variable "name" {
-  type        = string
-  description = "The name for the RDS"
+    type        = string
+    description = "The name for the RDS"
+}
+
+variable "subnet_ids" {
+    description = "List of subnet IDs"
+    type        = list(string)
 }
