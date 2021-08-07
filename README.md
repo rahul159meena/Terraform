@@ -651,8 +651,8 @@ variable "lt_description" {
 ### Output
 
 
-| Name                          | Description                                                                                  |
-| :---------------------------: | :------------------------------------------------------------------------------------------: |
+| Name                          | Description                                                                               |
+| :---------------------------: | :---------------------------------------------------------------------------------------: |
 | vpc_arn                       | Amazon Resource Name (ARN) of VPC                                                         |
 | vpc_id                        | The ID of the VPC                                                                         |
 | vpc_cidr_block                | The CIDR block of the VPC                                                                 |
