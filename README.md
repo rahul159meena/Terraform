@@ -1,4 +1,4 @@
-# AWS modules using Terraform
+# Creating AWS modules using Terraform
 
 ## This Terraform repository contains several module which will creates the variety of resources: 
  - VPC
